@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UsersComponent } from './users/users.component';
 import { NouveauCollaborateurComponent } from './nouveau-collaborateur/nouveau-collaborateur.component';
+import { UserService } from './service/user.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -13,10 +15,11 @@ import { NouveauCollaborateurComponent } from './nouveau-collaborateur/nouveau-c
     NouveauCollaborateurComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
