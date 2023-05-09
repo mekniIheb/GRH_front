@@ -1,1 +1,179 @@
-<p>nouveau-collaborateur works!</p>
+<div class="card" [style]="{'width': '50%'}">
+  <form>
+    <p-fieldset legend="Informations Collaborateur">
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="numCin">N° CIN*</label>
+            <p-inputNumber id="numCin" inputId="minmax" mode="decimal" [min]="0"
+            ></p-inputNumber>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="nomComplet">Nom Complet*</label>
+            <input id="nomComplet" type="text" pInputText class="p-inputtext-lg">
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="NumeroDuCompte">N° du Compte*</label>
+            <p-inputNumber id="NumeroDuCompte" inputId="minmax" mode="decimal" [min]="0"
+            ></p-inputNumber>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="numSecurite">N° Securité Sociale*</label>
+            <p-inputNumber id="numSecurite" inputId="minmax" mode="decimal" [min]="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="dateNaissance">Date de naissance*</label>
+            <p-calendar id="dateNaissance" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="numTelephone">N° telephone*</label>
+            <p-inputNumber id="numTelephone" inputId="minmax" [min]="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="adresse">Adresse </label>
+            <input type="text" id="adresse" pInputText class="p-inputtext-lg">
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="email">Email</label>
+            <input type="email" id="email" pInputText class="p-inputtext-lg">
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Qualifications">
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="natureEtude">Nature d'etude*</label>
+            <input type="text" id="natureEtude" pInputText class="p-inputtext-lg">
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="certif">Certification</label>
+            <input type="text" id="certif" pInputText class="p-inputtext-lg">
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="niveauEtude">Niveau d'etude*</label>
+            <p-dropdown id="niveauEtude" [options]="niveauEtudeList" name="nomNiveauEtude"
+                        placeholder="Choisir" optionValue="idNiveauEtude" optionLabel="nomNiveauEtude"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="anneeExperience">Année d'experience*</label>
+            <p-inputNumber id="anneeExperience" inputId="minmax" [min]="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="contrat">
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="typeContrat">Type Contrat*</label>
+            <p-dropdown id="typeContrat" [options]="typeContratList" name="nomTypeContrat"
+                        placeholder="Choisir" optionValue="idTypeContrat" optionLabel="nomTypeContrat"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="salaireDeBAse">Salaire de Base*</label>
+            <p-inputNumber id="salaireDeBAse" inputId="minmax" [min]="0"
+            ></p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="avantageSalaire">Avantage Salaire*</label>
+            <p-dropdown id="avantageSalaire" [options]="avantageSalaireList" name="nomAvantageSalaire"
+                        placeholder="Choisir" optionValue="idAvantageSalaire" optionLabel="nomAvantageSalaire"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="dateDebutContrat">Date Debut de Contrat *</label>
+            <p-calendar id="dateDebutContrat" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="dateFinContrat">Date Fin de Contrat *</label>
+            <p-calendar id="dateFinContrat" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="Grade">
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="departement">Departement*</label>
+            <p-dropdown id="departement" [options]="departementList" name="nomDepartement"
+                        placeholder="Choisir" optionValue="idDepartement" optionLabel="nomDepartement"></p-dropdown>
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="poste">Poste*</label>
+            <p-dropdown id="poste" [options]="posteList" name="nomPoste"
+                        placeholder="Choisir" optionValue="idPoste" optionLabel="nomPoste"></p-dropdown>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="responsable">Responsable</label>
+            <p-dropdown id="responsable" [options]="responsableList" name="nomResponsable"
+                        placeholder="Choisir" optionValue="idResponsable" optionLabel="nomResponsable"></p-dropdown>
+          </div>
+        </div>
+      </div>
+    </p-fieldset>
+    <p-fieldset legend="piece Jointe">
+      <p-table [tableStyle]="{'min-width': '30rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>documents</th>
+            <th>Obligatoire</th>
+            <th>Status</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body">
+          <tr>
+            <td>Cin</td>
+            <td>Oui</td>
+            <td>
+              <div class="p-field-checkbox">
+                <p-triStateCheckbox ></p-triStateCheckbox>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Diplome</td>
+            <td>Oui</td>
+            <td>
+              <div class="p-field-checkbox">
+                <p-triStateCheckbox></p-triStateCheckbox>
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-fieldset>
+  </form>
+</div>

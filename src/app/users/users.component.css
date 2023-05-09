@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.block {
+  width: 100px;
+  height: 100px;
+  margin: 10px;
+  background-color: #ccc;
+}
+
+button {
+  min-width: 10rem;
+  margin-right: .5rem;
+}
+
+@media screen and (max-width: 960px) {
+  button {
+    width: 100%;
+    margin-bottom: .5rem;
+  }
+}

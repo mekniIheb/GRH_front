@@ -18,7 +18,16 @@ export class User {
   collaborateur?: string;
   commentaire?: string;
   anciennete?: string;
-  idGrade?: number;
-  idContrat?: number;
+  salaireDeBase?: number;
+  dateDebutContrat?: Date;
+  dateFinContrat?: Date;
+  idTypeContrat?: number;
+  idAvantageSalaire?: number;
+  idNiveauEtude?: number;
+  idPoste?: number;
+  idResponsable?: number;
+  idDepartement?: number;
   pieceJointes?: PieceJointe[];
+
+
 }

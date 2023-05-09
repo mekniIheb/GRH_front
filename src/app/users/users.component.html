@@ -1,6 +1,62 @@
-<p-card class="my-card">
-  <h2>Mon formulaire</h2>
-  <form>
-    <!-- Ajoutez ici les champs de votre formulaire -->
-  </form>
+
+<p-card header="consultation GRH" [ngStyle]="{ 'width': '900px', 'text-align': 'center'}">
+  <p-fieldset>
+    <p><strong>Masse salariale :</strong> {{ totalMasseSalariale }}</p>
+    <p>Salaire Moyen : {{ salaireMoyen }}</p>
+    <p>Pyramide des ages : {{ pyramideAge }}</p>
+
+    <!-- <a pButton pRipple href="/add-user" icon="pi pi-plus" label="Nouveau Collaborateur" class="p-button-secondary"></a> -->
+    <button pButton pRipple type="button" icon="pi pi-plus" (click)="ajouterUSer()" class="p-button-secondary">
+      Nouveau Collaborateur
+    </button>
+    <br>
+    <br>
+    <p-table [value]="usersList" [tableStyle]="{'min-width': '50rem'}">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id Collaborateur</th>
+          <th>Nom Complet</th>
+          <th>Poste</th>
+          <th>Type Contrat</th>
+          <th>Ancienneté</th>
+          <th>Masse Salariale</th>
+          <th>Actions</th>
+
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+        <tr>
+          <td>{{user.idCollaborateur}}</td>
+          <td>{{user.nomComplet}}</td>
+          <td>{{user.idPoste|  poste | async}}</td>
+          <td>{{user.idTypeContrat | typeContrat |async}}</td>
+          <td>{{user.anciennete}}</td>
+          <td></td>
+
+
+          <td>
+            <p-button icon="pi pi-eye" styleClass="p-button-rounded p-button-text"></p-button>
+            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+            <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-success p-button-text"
+                      (onClick)="delete(user.idCollaborateur)"></p-button>
+
+            <p-button icon="pi pi-file-pdf" styleClass="p-button-rounded p-button-danger p-button-text"></p-button>
+          </td>
+          <td></td>
+
+        </tr>
+      </ng-template>
+    </p-table>
+  </p-fieldset>
 </p-card>
+<p-toast position="top-center" key="c" [baseZIndex]="5000">
+  <ng-template let-message pTemplate="message">
+    <div class="flex flex-column" style="flex: 1">
+      <div class="text-center">
+        <i class="pi pi-exclamation-triangle" style="font-size: 3rem"></i>
+        <h4>{{message.summary}}</h4>
+        <p>{{message.detail}}</p>
+      </div>
+    </div>
+  </ng-template>
+</p-toast>

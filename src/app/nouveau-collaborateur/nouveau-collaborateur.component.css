@@ -1,0 +1,78 @@
+input[type=text],
+input[type=email],
+input[type=number],
+input[type=date] {
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  box-sizing: border-box;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+button{
+  margin: 0 auto;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+
+.error {
+  color: red;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin-left: auto;
+  margin-right: auto;
+  width: 6em
+}
+
+select {
+  font-size: 16px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+}
+
+/* Style pour la flèche de sélection */
+select::-ms-expand {
+  display: none;
+}
+
+
+select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 0.8em;
+  pointer-events: none;
+}
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
