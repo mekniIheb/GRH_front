@@ -15,6 +15,7 @@ export class User {
   anneeExperience?: number;
   niveauEtude?: string;
   recomendation?: boolean;
+  status?:boolean;
   collaborateur?: string;
   commentaire?: string;
   anciennete?: string;

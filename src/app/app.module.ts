@@ -7,7 +7,7 @@ import {UsersComponent} from './users/users.component';
 import {NouveauCollaborateurComponent} from './nouveau-collaborateur/nouveau-collaborateur.component';
 import {UserService} from './service/user.service';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {DropdownModule} from "primeng/dropdown";
 import {RadioButtonModule} from "primeng/radiobutton";
@@ -19,12 +19,15 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PostePipe} from './pipes/poste.pipe';
 import {TypeContratPipe} from './pipes/type-contrat.pipe';
 import {ToastModule} from "primeng/toast";
-import {PaginatorModule} from "primeng/paginator";
 import {InputNumberModule} from "primeng/inputnumber";
 import {InputTextModule} from "primeng/inputtext";
 import {PosteService} from "./service/poste.service";
 import {NiveauEtudeService} from "./service/niveau-etude.service";
 import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
+import {FileUploadModule} from "primeng/fileupload";
+import {InputTextareaModule} from "primeng/inputtextarea";
+import {RippleModule} from "primeng/ripple";
+import {CommonModule, DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     TypeContratPipe
   ],
   imports: [
+    CommonModule,
     FormsModule,
     ToastModule,
     BrowserAnimationsModule,
@@ -52,8 +56,12 @@ import {TriStateCheckboxModule} from "primeng/tristatecheckbox";
     InputNumberModule,
     InputTextModule,
     TriStateCheckboxModule,
+    FileUploadModule,
+    InputTextareaModule,
+    ReactiveFormsModule,
+    RippleModule
   ],
-  providers: [UserService,PosteService,NiveauEtudeService],
+  providers: [UserService, PosteService, NiveauEtudeService,DatePipe],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

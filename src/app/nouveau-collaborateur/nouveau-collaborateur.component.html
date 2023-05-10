@@ -1,16 +1,21 @@
+<p-toast></p-toast>
 <div class="card" [style]="{'width': '50%'}">
-  <form>
+  <form [formGroup]="userForm">
     <p-fieldset legend="Informations Collaborateur">
       <div class="flex-container">
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="numCin">N° CIN*</label>
-            <p-inputNumber id="numCin" inputId="minmax" mode="decimal" [min]="0"
+            <p-inputNumber id="numCin" formControlName="cin" inputId="minmax" mode="decimal" [min]="0"
             ></p-inputNumber>
+            <small *ngIf="userForm?.get('cin')?.touched && userForm?.get('cin')?.invalid"
+                   class="p-error block">C'est un Champ Obligatoire qui doit contenir 8 chiffres</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="nomComplet">Nom Complet*</label>
-            <input id="nomComplet" type="text" pInputText class="p-inputtext-lg">
+            <input id="nomComplet" formControlName="nomComplet" type="text" pInputText class="p-inputtext-lg">
+            <small *ngIf="userForm?.get('nomComplet')?.touched && userForm?.get('nomComplet')?.invalid"
+                   class="p-error block">C'est un Champ Obligatoire </small>
           </div>
         </div>
       </div>
@@ -18,13 +23,19 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="NumeroDuCompte">N° du Compte*</label>
-            <p-inputNumber id="NumeroDuCompte" inputId="minmax" mode="decimal" [min]="0"
+            <p-inputNumber id="NumeroDuCompte" formControlName="numeroDuCompte" inputId="minmax" mode="decimal"
+                           [min]="0"
             ></p-inputNumber>
+            <small *ngIf="userForm?.get('numeroDuCompte')?.touched && userForm?.get('numeroDuCompte')?.invalid"
+                   class="p-error block">C'est un Champ Obligatoire qui doit contenir 13 chiffres</small>
           </div>
           <div class="field col-12 md:col-6">
-            <label for="numSecurite">N° Securité Sociale*</label>
-            <p-inputNumber id="numSecurite" inputId="minmax" mode="decimal" [min]="0"
+            <label for="numSecurite">N° Securité Sociale</label>
+            <p-inputNumber id="numSecurite" formControlName="numeroSecuriteSociale" inputId="minmax" mode="decimal"
+                           [min]="0"
             ></p-inputNumber>
+            <small *ngIf="userForm?.get('numeroSecuriteSociale')?.invalid"
+                   class="p-error block">C'est un Champ qui doit contenir 15 chiffres</small>
           </div>
         </div>
       </div>
@@ -32,12 +43,17 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="dateNaissance">Date de naissance*</label>
-            <p-calendar id="dateNaissance" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <p-calendar id="dateNaissance" (onSelect)="formatSelectedDate()" formControlName="dateDeNaissance"
+                        dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <small *ngIf="userForm?.get('dateDeNaissance')?.invalid && userForm?.get('dateDeNaissance')?.touched"
+                   class="p-error block">C'est un Champ obligatoire</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="numTelephone">N° telephone*</label>
-            <p-inputNumber id="numTelephone" inputId="minmax" [min]="0"
+            <p-inputNumber id="numTelephone" formControlName="numeroTelephone" inputId="minmax" [min]="0"
             ></p-inputNumber>
+            <small *ngIf="userForm?.get('numeroTelephone')?.touched&& userForm?.get('numeroTelephone')?.invalid"
+                   class="p-error block">C'est un Champ obligatoire qui doit contenir 8 chiffres </small>
           </div>
         </div>
       </div>
@@ -45,11 +61,14 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="adresse">Adresse </label>
-            <input type="text" id="adresse" pInputText class="p-inputtext-lg">
+            <input type="text" id="adresse" formControlName="adresse" pInputText class="p-inputtext-lg">
+
           </div>
           <div class="field col-12 md:col-6">
             <label for="email">Email</label>
-            <input type="email" id="email" pInputText class="p-inputtext-lg">
+            <input type="email" id="email" formControlName="email" pInputText class="p-inputtext-lg">
+            <small *ngIf="userForm?.get('email')?.touched" class="p-error block">Email
+              invalide</small>
           </div>
         </div>
       </div>
@@ -59,11 +78,13 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="natureEtude">Nature d'etude*</label>
-            <input type="text" id="natureEtude" pInputText class="p-inputtext-lg">
+            <input type="text" id="natureEtude" formControlName="natureEtude" pInputText class="p-inputtext-lg">
+            <small *ngIf="userForm?.get('natureEtude')?.touched && userForm?.get('natureEtude')?.hasError('required')"
+                   class="p-error block">C'est un Champ Obligatoire</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="certif">Certification</label>
-            <input type="text" id="certif" pInputText class="p-inputtext-lg">
+            <input type="text" id="certif" formControlName="certifications" pInputText class="p-inputtext-lg">
           </div>
         </div>
       </div>
@@ -71,13 +92,19 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="niveauEtude">Niveau d'etude*</label>
-            <p-dropdown id="niveauEtude" [options]="niveauEtudeList" name="nomNiveauEtude"
+            <p-dropdown id="niveauEtude" [options]="niveauEtudeList" formControlName="idNiveauEtude"
+                        name="nomNiveauEtude"
                         placeholder="Choisir" optionValue="idNiveauEtude" optionLabel="nomNiveauEtude"></p-dropdown>
+            <small *ngIf="userForm?.get('idNiveauEtude')?.touched && userForm?.get('idNiveauEtude')?.invalid"
+                   id="idNiveauEtude" class="p-error block">C'est un Champ Obligatoire</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="anneeExperience">Année d'experience*</label>
-            <p-inputNumber id="anneeExperience" inputId="minmax" [min]="0"
+            <p-inputNumber id="anneeExperience" formControlName="anneeExperience" inputId="minmax" [min]="0"
             ></p-inputNumber>
+            <small
+              *ngIf="userForm?.get('anneeExperience')?.touched"
+              class="p-error block">C'est un Champ Obligatoire</small>
           </div>
         </div>
       </div>
@@ -87,34 +114,49 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="typeContrat">Type Contrat*</label>
-            <p-dropdown id="typeContrat" [options]="typeContratList" name="nomTypeContrat"
-                        placeholder="Choisir" optionValue="idTypeContrat" optionLabel="nomTypeContrat"></p-dropdown>
+            <p-dropdown id="typeContrat" formControlName="idTypeContrat" [options]="typeContratList"
+                        name="nomTypeContrat"
+                        placeholder="Choisir" optionValue="idTypeContrat" optionLabel="nomTypeContrat" (onChange)="selectedContrat($event)"></p-dropdown>
+            <small
+              *ngIf="userForm?.get('idTypeContrat')?.touched && userForm?.get('idTypeContrat')?.hasError('required')"
+              class="p-error block">C'est un Champ Obligatoire</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="salaireDeBAse">Salaire de Base*</label>
-            <p-inputNumber id="salaireDeBAse" inputId="minmax" [min]="0"
+            <p-inputNumber id="salaireDeBAse" formControlName="salaireDeBase" inputId="minmax" [min]="0"
             ></p-inputNumber>
+            <small
+              *ngIf="userForm?.get('salaireDeBase')?.touched"
+              class="p-error block">C'est un Champ Obligatoire</small>
           </div>
         </div>
       </div>
       <div class="flex-container">
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
-            <label for="avantageSalaire">Avantage Salaire*</label>
+            <label for="avantageSalaire">Avantage Salaire</label>
             <p-dropdown id="avantageSalaire" [options]="avantageSalaireList" name="nomAvantageSalaire"
-                        placeholder="Choisir" optionValue="idAvantageSalaire" optionLabel="nomAvantageSalaire"></p-dropdown>
+                        placeholder="Choisir" optionValue="idAvantageSalaire" formControlName="idAvantageSalaire"
+                        optionLabel="nomAvantageSalaire"></p-dropdown>
           </div>
           <div class="field col-12 md:col-6">
             <label for="dateDebutContrat">Date Debut de Contrat *</label>
-            <p-calendar id="dateDebutContrat" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <p-calendar id="dateDebutContrat" (onSelect)="formatSelectedDateDebut()" formControlName="dateDebutContrat"
+                        dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <small *ngIf="userForm?.get('dateDebutContrat')?.invalid && userForm?.get('dateDebutContrat')?.touched"
+                   class="p-error block">C'est un Champ obligatoire</small>
           </div>
         </div>
       </div>
-      <div class="flex-container">
+      <div class="flex-container" >
         <div class="grid p-fluid mt-3">
-          <div class="field col-12 md:col-6">
+           <div class="field col-12 md:col-6" *ngIf="selectedContratValue">
             <label for="dateFinContrat">Date Fin de Contrat *</label>
-            <p-calendar id="dateFinContrat" dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <p-calendar id="dateFinContrat"  formControlName="dateFinContrat"
+                        dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
+            <small *ngIf="userForm?.get('dateFinContrat')?.invalid && userForm?.get('dateFinContrat')?.touched"
+                   class="p-error block">C'est un Champ obligatoire</small>
+
           </div>
         </div>
       </div>
@@ -125,55 +167,114 @@
           <div class="field col-12 md:col-6">
             <label for="departement">Departement*</label>
             <p-dropdown id="departement" [options]="departementList" name="nomDepartement"
-                        placeholder="Choisir" optionValue="idDepartement" optionLabel="nomDepartement"></p-dropdown>
+                        placeholder="Choisir" formControlName="idDepartement" optionValue="idDepartement"
+                        optionLabel="nomDepartement"></p-dropdown>
+            <small
+              *ngIf="userForm?.get('idDepartement')?.touched && userForm?.get('idDepartement')?.hasError('required')"
+              class="p-error block">C'est un Champ Obligatoire</small>
           </div>
           <div class="field col-12 md:col-6">
             <label for="poste">Poste*</label>
             <p-dropdown id="poste" [options]="posteList" name="nomPoste"
-                        placeholder="Choisir" optionValue="idPoste" optionLabel="nomPoste"></p-dropdown>
+                        placeholder="Choisir" formControlName="idPoste" optionValue="idPoste"
+                        optionLabel="nomPoste" (onChange)="selectedPoste($event)"></p-dropdown>
+            <small
+              *ngIf="userForm?.get('idPoste')?.touched && userForm?.get('idPoste')?.hasError('required')"
+              class="p-error block">C'est un Champ Obligatoire</small>
           </div>
         </div>
       </div>
       <div class="flex-container">
         <div class="grid p-fluid mt-3">
-          <div class="field col-12 md:col-6">
+          <div class="field col-12 md:col-6" *ngIf="selectedPosteValue">
             <label for="responsable">Responsable</label>
-            <p-dropdown id="responsable" [options]="responsableList" name="nomResponsable"
+            <p-dropdown id="responsable" formControlName="idResponsable" [options]="responsableList"
+                        name="nomResponsable"
                         placeholder="Choisir" optionValue="idResponsable" optionLabel="nomResponsable"></p-dropdown>
           </div>
         </div>
       </div>
     </p-fieldset>
     <p-fieldset legend="piece Jointe">
-      <p-table [tableStyle]="{'min-width': '30rem'}">
-        <ng-template pTemplate="header">
-          <tr>
-            <th>documents</th>
-            <th>Obligatoire</th>
-            <th>Status</th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body">
-          <tr>
-            <td>Cin</td>
-            <td>Oui</td>
-            <td>
-              <div class="p-field-checkbox">
-                <p-triStateCheckbox ></p-triStateCheckbox>
-              </div>
-            </td>
-          </tr>
-          <tr>
-            <td>Diplome</td>
-            <td>Oui</td>
-            <td>
-              <div class="p-field-checkbox">
-                <p-triStateCheckbox></p-triStateCheckbox>
-              </div>
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
+      <div class="flex-container">
+        <div class="p-fluid p-grid p-formgrid flex-child">
+          <p-table [rows]="5" [showCurrentPageReport]="true" [value]="[[]]">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Documents</th>
+                <th>Obligatoire</th>
+                <th>Statut</th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body">
+              <tr>
+                <td>Cin</td>
+                <td>Oui</td>
+                <td>
+                  <div class="p-field-checkbox">
+                    <p-checkbox formControlName="status" [binary]="true" inputId="binary"></p-checkbox>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Diplome</td>
+                <td>Oui</td>
+                <td>
+                  <div class="p-field-checkbox">
+                    <p-checkbox [binary]="true" inputId="binary"></p-checkbox>
+                  </div>
+                </td>
+              </tr>
+            </ng-template>
+
+
+          </p-table>
+        </div>
+        <div class="flex-container">
+          <p-fileUpload [style]="{'padding':'10px'}" formControlName="pieceJointes" mode="basic" chooseLabel="Choose"
+                        name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
+                        (change)="onFileSelect($event)" [multiple]="true"></p-fileUpload>
+        </div>
+      </div>
+
+    </p-fieldset>
+    <p-fieldset legend="Autres Informations">
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="recommandation">Recommandation:</label>
+            <p-checkbox id="recommandation" formControlName="recommandation" [binary]="true"
+                        inputId="binary" (onChange)="selectedRecommandation($event)"></p-checkbox>
+          </div>
+          <div class="field col-12 md:col-6" *ngIf="selectedRecommandationValue">
+            <label>Collaborateur:</label>
+            <select formControlName="collaborateur">
+              <option value="" disabled selected>Choisir un collaborateur</option>
+              <option *ngFor="let user of userList" [value]="user.idCollaborateur">{{ user.nomComplet }}</option>
+            </select>
+
+          </div>
+          <div class="field col-12 md:col-6">
+            <label for="commentaire">Commentaire:</label>
+            <textarea rows="5" formControlName="commentaire" cols="30" pInputTextarea id="commentaire"></textarea>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <button pButton pRipple type="submit" label="Enregistrer" class="p-button-primary"(click)="saveUser()"></button>
+                   <!--[disabled]="!userForm.valid"-->
+          </div>
+          <div class="field col-12 md:col-6">
+            <button pButton pRipple type="submit" label="Initialiser" (click)="reset()"
+                    class="p-button-secondary"></button>
+
+          </div>
+        </div>
+      </div>
+
     </p-fieldset>
   </form>
 </div>

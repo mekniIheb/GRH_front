@@ -14,6 +14,10 @@ export class UserService {
   constructor(private http: HttpClient) {
   }
 
+  saveUser(user: User): Observable<User> {
+    return this.http.post<User>(url + '/user', user);
+  }
+
   getAllUser(): Observable<User[]> {
     return this.http.get<User[]>(url + '/user');
   }
