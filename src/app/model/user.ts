@@ -14,12 +14,13 @@ export class User {
   certifications?: string;
   anneeExperience?: number;
   niveauEtude?: string;
-  recomendation?: boolean;
-  status?:boolean;
+  recommendation?: boolean;
+  status?: boolean;
   collaborateur?: string;
   commentaire?: string;
   anciennete?: string;
   salaireDeBase?: number;
+  masseSalariale?: number;
   dateDebutContrat?: Date;
   dateFinContrat?: Date;
   idTypeContrat?: number;

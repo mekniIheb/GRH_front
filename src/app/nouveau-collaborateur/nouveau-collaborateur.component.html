@@ -1,6 +1,7 @@
 <p-toast></p-toast>
+<p-breadcrumb [model]="items" [home]="home" routerLink="/users"></p-breadcrumb>
 <div class="card" [style]="{'width': '50%'}">
-  <form [formGroup]="userForm">
+  <form [formGroup]="userForm" (ngSubmit)="this.flag==='create' ? saveUser() :updateUser()">
     <p-fieldset legend="Informations Collaborateur">
       <div class="flex-container">
         <div class="grid p-fluid mt-3">
@@ -72,6 +73,17 @@
           </div>
         </div>
       </div>
+      <div class="flex-container">
+        <div class="grid p-fluid mt-3">
+          <div class="field col-12 md:col-6">
+            <label for="age">Age </label>
+            <p-inputNumber id="age" formControlName="age" inputId="minmax" [min]="0"
+            ></p-inputNumber>
+
+          </div>
+
+        </div>
+      </div>
     </p-fieldset>
     <p-fieldset legend="Qualifications">
       <div class="flex-container">
@@ -116,7 +128,8 @@
             <label for="typeContrat">Type Contrat*</label>
             <p-dropdown id="typeContrat" formControlName="idTypeContrat" [options]="typeContratList"
                         name="nomTypeContrat"
-                        placeholder="Choisir" optionValue="idTypeContrat" optionLabel="nomTypeContrat" (onChange)="selectedContrat($event)"></p-dropdown>
+                        placeholder="Choisir" optionValue="idTypeContrat" optionLabel="nomTypeContrat"
+                        (onChange)="selectedContrat($event)"></p-dropdown>
             <small
               *ngIf="userForm?.get('idTypeContrat')?.touched && userForm?.get('idTypeContrat')?.hasError('required')"
               class="p-error block">C'est un Champ Obligatoire</small>
@@ -148,11 +161,11 @@
           </div>
         </div>
       </div>
-      <div class="flex-container" >
+      <div class="flex-container">
         <div class="grid p-fluid mt-3">
-           <div class="field col-12 md:col-6" *ngIf="selectedContratValue">
+          <div class="field col-12 md:col-6" *ngIf="selectedContratValue">
             <label for="dateFinContrat">Date Fin de Contrat *</label>
-            <p-calendar id="dateFinContrat"  formControlName="dateFinContrat"
+            <p-calendar id="dateFinContrat" (onSelect)="formatSelectedDateFin()" formControlName="dateFinContrat"
                         dateFormat="dd/mm/yy" [showIcon]="true"></p-calendar>
             <small *ngIf="userForm?.get('dateFinContrat')?.invalid && userForm?.get('dateFinContrat')?.touched"
                    class="p-error block">C'est un Champ obligatoire</small>
@@ -231,9 +244,9 @@
           </p-table>
         </div>
         <div class="flex-container">
-          <p-fileUpload [style]="{'padding':'10px'}" formControlName="pieceJointes" mode="basic" chooseLabel="Choose"
-                        name="demo[]" url="https://www.primefaces.org/cdn/api/upload.php"
-                        (change)="onFileSelect($event)" [multiple]="true"></p-fileUpload>
+          <div class="col-6">
+            <input type="file" (change)="selectFiles($event)" />
+          </div>
         </div>
       </div>
 
@@ -243,14 +256,14 @@
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
             <label for="recommandation">Recommandation:</label>
-            <p-checkbox id="recommandation" formControlName="recommandation" [binary]="true"
+            <p-checkbox id="recommandation" formControlName="recommendation" [binary]="true"
                         inputId="binary" (onChange)="selectedRecommandation($event)"></p-checkbox>
           </div>
           <div class="field col-12 md:col-6" *ngIf="selectedRecommandationValue">
             <label>Collaborateur:</label>
             <select formControlName="collaborateur">
               <option value="" disabled selected>Choisir un collaborateur</option>
-              <option *ngFor="let user of userList" [value]="user.idCollaborateur">{{ user.nomComplet }}</option>
+              <option *ngFor="let user of userList" [value]="user.nomComplet">{{ user.nomComplet }}</option>
             </select>
 
           </div>
@@ -264,8 +277,8 @@
       <div class="flex-container">
         <div class="grid p-fluid mt-3">
           <div class="field col-12 md:col-6">
-            <button pButton pRipple type="submit" label="Enregistrer" class="p-button-primary"(click)="saveUser()"></button>
-                   <!--[disabled]="!userForm.valid"-->
+            <button pButton pRipple type="submit" class="p-button-primary"
+                    [disabled]="!userForm.valid">{{buttonName}}</button>
           </div>
           <div class="field col-12 md:col-6">
             <button pButton pRipple type="submit" label="Initialiser" (click)="reset()"

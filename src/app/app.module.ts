@@ -28,6 +28,8 @@ import {FileUploadModule} from "primeng/fileupload";
 import {InputTextareaModule} from "primeng/inputtextarea";
 import {RippleModule} from "primeng/ripple";
 import {CommonModule, DatePipe} from "@angular/common";
+import {TabMenuModule} from "primeng/tabmenu";
+import {BreadcrumbModule} from "primeng/breadcrumb";
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import {CommonModule, DatePipe} from "@angular/common";
     FileUploadModule,
     InputTextareaModule,
     ReactiveFormsModule,
-    RippleModule
+    RippleModule,
+    TabMenuModule,
+    BreadcrumbModule
   ],
   providers: [UserService, PosteService, NiveauEtudeService,DatePipe],
   bootstrap: [AppComponent],

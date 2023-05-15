@@ -3,10 +3,10 @@
   <p-fieldset>
     <p><strong>Masse salariale :</strong> {{ totalMasseSalariale }}</p>
     <p>Salaire Moyen : {{ salaireMoyen }}</p>
-    <p>Pyramide des ages : {{ pyramideAge }}</p>
+    <p>Pyramide des ages : {{ pyramideAgeMoy }}</p>
 
     <!-- <a pButton pRipple href="/add-user" icon="pi pi-plus" label="Nouveau Collaborateur" class="p-button-secondary"></a> -->
-    <button pButton pRipple type="button" icon="pi pi-plus" (click)="ajouterUSer()" class="p-button-secondary">
+    <button pButton pRipple type="button" icon="pi pi-plus" (click)="ajouterUSer('create')" class="p-button-secondary">
       Nouveau Collaborateur
     </button>
     <br>
@@ -31,12 +31,12 @@
           <td>{{user.idPoste|  poste | async}}</td>
           <td>{{user.idTypeContrat | typeContrat |async}}</td>
           <td>{{user.anneeExperience}}</td>
-          <td></td>
+          <td>{{user.masseSalariale}}</td>
 
 
           <td>
-            <p-button icon="pi pi-eye" styleClass="p-button-rounded p-button-text"></p-button>
-            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text"></p-button>
+            <p-button icon="pi pi-eye" styleClass="p-button-rounded p-button-text" (click)="userDetails(user.idCollaborateur,'consulte')"></p-button>
+            <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" (click)="userDetails(user.idCollaborateur,'edit')"></p-button>
             <p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-success p-button-text"
                       (onClick)="delete(user.idCollaborateur)"></p-button>
 
